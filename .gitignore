@@ -1,13 +1,45 @@
-# LinguaHome
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
-Language-Driven Smart Home Automation Framework
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
 
-## Quick Start
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
 
-```bash
-pip install litellm python-telegram-bot twilio flask
-export OPENAI_API_KEY="your-key"
-python3 -m linguaHome.main
-```
+# OS
+.DS_Store
+Thumbs.db
 
-See [linguaHome/README.md](linguaHome/README.md) for full documentation.
+# Project specific
+memory/
+*.log
+
+# API keys (never commit these!)
+.env
