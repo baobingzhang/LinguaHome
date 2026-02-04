@@ -2,108 +2,107 @@
 
 **Language-Driven Smart Home Automation**
 
-LinguaHome 是一个基于 LLM 代码生成的智能家居控制框架。用户使用自然语言发送请求，系统通过 LLM 生成 Python 代码并执行，实现智能家居的查询和控制。
+LinguaHome is a code-generative LLM framework for smart home control. Users send requests in natural language, and the system generates and executes Python code through LLM to query and control smart home devices.
 
-## ✨ 特点
+## ✨ Features
 
-- **🤖 Code-as-Intent**: LLM 动态生成代码，无需预定义意图分类
-- **🔌 Zero-Shot Control**: 零样本设备控制能力
-- **🧠 Memory System**: 日记忆 + 长期记忆支持
-- **🛡️ Safe Execution**: 安全的代码执行沙盒
-- **📱 Multi-Channel**: 支持 Telegram、WhatsApp 和 CLI 交互
-- **🤖 Multi-LLM**: 支持 OpenAI、Anthropic、Gemini
+- **🤖 Code-as-Intent**: LLM dynamically generates code, no predefined intent classification needed
+- **🔌 Zero-Shot Control**: Zero-shot device control capability
+- **🧠 Memory System**: Daily memory + long-term memory support
+- **🛡️ Safe Execution**: Secure code execution sandbox
+- **📱 Multi-Channel**: Supports Telegram, WhatsApp, and CLI interaction
+- **🤖 Multi-LLM**: Supports OpenAI, Anthropic, Gemini
 
-## 📁 项目结构
+## 📁 Project Structure
 
 ```
-linguaHome/
-├── __init__.py              # 包初始化
-├── main.py                  # CLI 入口
-├── config.py                # 配置和设备映射
-├── mock_sensors.py          # 模拟传感器
-├── requirements.txt         # 依赖
-├── test_linguahome.py       # 测试脚本
+├── __init__.py              # Package initialization
+├── main.py                  # CLI entry point
+├── config.py                # Configuration and device mapping
+├── mock_sensors.py          # Mock sensors for testing
+├── requirements.txt         # Dependencies
+├── test_linguahome.py       # Test script
 │
-├── agent/                   # Agent 核心
-│   ├── loop.py              # 主循环
-│   ├── memory.py            # 记忆系统
-│   ├── context.py           # 上下文构建
-│   ├── code_executor.py     # 代码执行器
-│   └── llm_provider.py      # LLM 接口 (OpenAI/Anthropic/Gemini)
+├── agent/                   # Agent core
+│   ├── loop.py              # Main loop
+│   ├── memory.py            # Memory system
+│   ├── context.py           # Context builder
+│   ├── code_executor.py     # Code executor
+│   └── llm_provider.py      # LLM interface (OpenAI/Anthropic/Gemini)
 │
-├── channels/                # 消息渠道
-│   ├── telegram_bot.py      # Telegram 集成
-│   └── whatsapp_bot.py      # WhatsApp 集成 (via Twilio)
+├── channels/                # Message channels
+│   ├── telegram_bot.py      # Telegram integration
+│   └── whatsapp_bot.py      # WhatsApp integration (via Twilio)
 │
-└── skills/                  # 技能文件
-    ├── linguahome/SKILL.md  # 核心技能
-    ├── sensor-query/SKILL.md # 传感器查询
-    └── device-control/SKILL.md # 设备控制
+└── skills/                  # Skill files
+    ├── linguahome/SKILL.md  # Core skill
+    ├── sensor-query/SKILL.md # Sensor query
+    └── device-control/SKILL.md # Device control
 ```
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 1. 安装依赖
+### 1. Install Dependencies
 
 ```bash
 pip install litellm python-telegram-bot twilio flask
 ```
 
-### 2. 配置环境变量
+### 2. Configure Environment Variables
 
 ```bash
-# LLM API (选择其一)
-export OPENAI_API_KEY="sk-..."        # GPT 模型
-export ANTHROPIC_API_KEY="sk-ant-..." # Claude 模型
-export GEMINI_API_KEY="..."           # Gemini 模型
+# LLM API (choose one)
+export OPENAI_API_KEY="sk-..."        # GPT models
+export ANTHROPIC_API_KEY="sk-ant-..." # Claude models
+export GEMINI_API_KEY="..."           # Gemini models
 
-# Telegram (可选)
+# Telegram (optional)
 export TELEGRAM_BOT_TOKEN="your-token"
 
-# WhatsApp (可选，需要 Twilio)
+# WhatsApp (optional, requires Twilio)
 export TWILIO_ACCOUNT_SID="your-sid"
 export TWILIO_AUTH_TOKEN="your-token"
 export TWILIO_WHATSAPP_NUMBER="whatsapp:+14155238886"
 
-# 模型选择 (默认 gpt-4o)
+# Model selection (default: gpt-4o)
 export LINGUAHOME_MODEL="gpt-4o"
-# 可选: claude, gemini, gpt-4o-mini, claude-haiku, gemini-flash
+# Options: claude, gemini, gpt-4o-mini, claude-haiku, gemini-flash
 ```
 
-### 3. 运行测试
+### 3. Run Tests
 
 ```bash
 python3 test_linguahome.py
 ```
 
-### 4. 交互模式
+### 4. Interactive Mode
 
 ```bash
-python3 -m linguaHome.main
+python3 main.py
 ```
 
-### 5. 单次查询
+### 5. Single Query
 
 ```bash
-python3 -m linguaHome.main "Robot Corner 温度多少？"
+python3 main.py "What's the temperature in Robot Corner?"
 ```
 
 ### 6. Telegram Bot
 
 ```bash
-python3 -m linguaHome.channels.telegram_bot
+python3 -m channels.telegram_bot
 ```
 
 ### 7. WhatsApp Bot
 
 ```bash
-python3 -m linguaHome.channels.whatsapp_bot
+python3 -m channels.whatsapp_bot
 ```
 
-## 🤖 支持的 LLM 模型
+## 🤖 Supported LLM Models
 
-| Provider | 模型 | 别名 |
-|----------|------|------|
+| Provider | Model | Alias |
+|----------|-------|-------|
 | OpenAI | gpt-4o | gpt4o |
 | OpenAI | gpt-4o-mini | - |
 | Anthropic | claude-3-5-sonnet | claude |
@@ -111,26 +110,26 @@ python3 -m linguaHome.channels.whatsapp_bot
 | Google | gemini-2.0-flash | gemini |
 | Google | gemini-1.5-pro | gemini-pro |
 
-## 🎯 使用示例
+## 🎯 Usage Examples
 
-### 查询温度
+### Query Temperature
 ```
-👤 You: Robot Corner 温度多少？
-🤖 LinguaHome: 🌡️ Robot Corner 温度: 23.9°C
-```
-
-### 控制设备
-```
-👤 You: 关掉入口的插座
-🤖 LinguaHome: ✅ 入口插座 (plug_3) 已关闭
+👤 You: What's the temperature in Robot Corner?
+🤖 LinguaHome: 🌡️ Robot Corner temperature: 23.9°C
 ```
 
-### 复杂查询
+### Control Device
 ```
-👤 You: 哪个房间最热？
-🤖 LinguaHome: 🔥 最热的房间是 Kaspar Room，温度 24.1°C
+👤 You: Turn off the plug at the entrance
+🤖 LinguaHome: ✅ Entrance plug (plug_3) has been turned off
+```
 
-所有温度:
+### Complex Query
+```
+👤 You: Which room is the warmest?
+🤖 LinguaHome: 🔥 The warmest room is Kaspar Room at 24.1°C
+
+All temperatures:
   • Kaspar Room: 24.1°C
   • Robot Corner: 23.9°C
   • Observation Room: 23.2°C
@@ -138,44 +137,44 @@ python3 -m linguaHome.channels.whatsapp_bot
   • Entrance: 21.8°C
 ```
 
-## 🏠 支持的设备
+## 🏠 Supported Devices
 
-| 设备名 | Sensor ID | Device ID | 房间 | 类型 |
-|--------|-----------|-----------|------|------|
-| plug_0 | 1025 | 25 | Working area | 可控插座 |
-| plug_1 | 1035 | 35 | Robot Corner | 可控插座 |
-| plug_2 | 1037 | 37 | Kaspar Room | 可控插座 |
-| plug_3 | 1039 | 39 | Entrance | 可控插座 |
-| plug_4 | 1041 | 41 | Working area | 可控插座 |
-| motion_0_temp | 1028 | 28 | Working area | 温度 |
-| motion_1_temp | 1060 | 60 | Entrance | 温度 |
-| motion_2_temp | 1066 | 66 | Observation Room | 温度 |
-| motion_3_temp | 1072 | 72 | Kaspar Room | 温度 |
-| motion_4_temp | 1078 | 78 | Robot Corner | 温度 |
+| Device Name | Sensor ID | Device ID | Room | Type |
+|-------------|-----------|-----------|------|------|
+| plug_0 | 1025 | 25 | Working area | Controllable plug |
+| plug_1 | 1035 | 35 | Robot Corner | Controllable plug |
+| plug_2 | 1037 | 37 | Kaspar Room | Controllable plug |
+| plug_3 | 1039 | 39 | Entrance | Controllable plug |
+| plug_4 | 1041 | 41 | Working area | Controllable plug |
+| motion_0_temp | 1028 | 28 | Working area | Temperature |
+| motion_1_temp | 1060 | 60 | Entrance | Temperature |
+| motion_2_temp | 1066 | 66 | Observation Room | Temperature |
+| motion_3_temp | 1072 | 72 | Kaspar Room | Temperature |
+| motion_4_temp | 1078 | 78 | Robot Corner | Temperature |
 
-## 🔧 架构
+## 🔧 Architecture
 
 ```
-用户消息 → LLM (生成代码) → 代码执行器 → 结果 → 用户响应
-               ↓
-         System Prompt
-         (设备映射 + 代码模板)
+User Message → LLM (Generate Code) → Code Executor → Result → User Response
+                    ↓
+              System Prompt
+              (Device Mapping + Code Templates)
 ```
 
-## 📊 Mock 模式
+## 📊 Mock Mode
 
-当无法连接到真实的 Fibaro Home Center 时，系统会自动使用 Mock 传感器进行测试。
+When unable to connect to the real Fibaro Home Center, the system automatically uses mock sensors for testing.
 
-## 🔐 安全特性
+## 🔐 Security Features
 
-- 白名单导入模块
-- 禁止危险操作 (os, subprocess, open, eval, exec)
-- 代码执行超时保护
-- 语法检查
+- Whitelisted import modules
+- Forbidden dangerous operations (os, subprocess, open, eval, exec)
+- Code execution timeout protection
+- Syntax checking
 
-## 📝 论文
+## 📝 Paper
 
-本项目用于 IEEE IoT-J 论文:
+This project is used for the IEEE IoT-J paper:
 
 > **LinguaHome: A Code-Generative LLM Framework for Conversational Smart Home Automation**
 
