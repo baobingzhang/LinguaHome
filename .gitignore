@@ -1,0 +1,13 @@
+# LinguaHome
+
+Language-Driven Smart Home Automation Framework
+
+## Quick Start
+
+```bash
+pip install litellm python-telegram-bot twilio flask
+export OPENAI_API_KEY="your-key"
+python3 -m linguaHome.main
+```
+
+See [linguaHome/README.md](linguaHome/README.md) for full documentation.
